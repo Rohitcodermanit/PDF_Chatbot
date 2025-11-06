@@ -1,23 +1,29 @@
+# Base image
 FROM python:3.12-slim
 
 # Set working directory
 WORKDIR /app
 
-# Copy requirements first and install dependencies
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+# Install system dependencies required for faiss, chroma-hnswlib, etc.
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    gcc \
+    g++ \
+    git \
+    && rm -rf /var/lib/apt/lists/*
 
-# Copy the rest of the app
+# Copy dependency file
+COPY requirements.txt .
+
+# Upgrade pip and install dependencies
+RUN pip install --upgrade pip \
+    && pip install --no-cache-dir -r requirements.txt
+
+# Copy the rest of your code
 COPY . .
 
-# Streamlit config (prevents usage prompts)
-ENV STREAMLIT_BROWSER_GATHER_USAGE_STATS=false
-
-# Expose the port for Hugging Face
+# Expose Streamlit or FastAPI port
 EXPOSE 7860
 
-# Healthcheck for Streamlit
-HEALTHCHECK CMD curl --fail http://localhost:7860/_stcore/health || exit 1
-
-# Run app.py by default
+# Default command (for Streamlit)
 CMD ["streamlit", "run", "main.py", "--server.port=7860", "--server.address=0.0.0.0"]
