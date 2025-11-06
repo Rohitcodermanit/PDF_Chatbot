@@ -2,7 +2,7 @@
 
 import os
 import streamlit as st 
-from langchain.chains.retrieval import create_history_aware_retriever, create_retrieval_chain
+from langchain.chains import create_history_aware_retriever, create_retrieval_chain
 from langchain_chroma import Chroma
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain_community.chat_message_histories import ChatMessageHistory 
@@ -129,3 +129,4 @@ if api_key:
 else:
 
     st.warning("please enter the GROQ API KEY")
+
