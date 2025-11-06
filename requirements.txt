@@ -10,7 +10,7 @@ langchain-groq==0.3.8
 # ✅ Vector DB + Transformers
 chromadb==0.4.24
 sentence-transformers==2.2.2
-faiss-cpu==1.5.2
+faiss-cpu==1.8.0
 # ✅ Utility + App
 python-dotenv
 ipykernel
