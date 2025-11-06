@@ -1,14 +1,12 @@
-# ✅ Core LangChain packages (pinned to stable versions)
 langchain==0.1.17
 langchain-core==0.1.52
 langchain-community==0.0.29
 langchain-openai==0.0.5
 langchain-text-splitters==0.0.1
-langchain-huggingface==0.0.5
+langchain-huggingface==1.0.1   # ✅ corrected version
 langchain-chroma==0.0.5
 langchain-groq==0.0.2
 
-# ✅ Other dependencies
 chromadb==0.4.24
 sentence-transformers==2.2.2
 faiss-cpu==1.7.4
