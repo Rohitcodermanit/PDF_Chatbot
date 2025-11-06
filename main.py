@@ -2,7 +2,7 @@
 
 import os
 import streamlit as st 
-from langchain.chains import create_history_aware_retriever, create_retrieval_chain
+from langchain.chains.retrieval import create_history_aware_retriever, create_retrieval_chain
 from langchain_chroma import Chroma
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain_community.chat_message_histories import ChatMessageHistory 
@@ -25,7 +25,7 @@ st.title('Conversational RAG with PDF uploads and chat history')
 st.write("upload pdf's and with their content")
 
 # input the groq API key
-api_key=st.text_input("Enter your Groq API key:", type='password')
+api_key=os.getenv("GROQ_API_KEY")
 
 ## check if groq api key is provided
 if api_key:
@@ -127,4 +127,5 @@ if api_key:
             st.write("Assistant",response['answer'])
             st.write('Chat History',session_history.messages)
 else:
+
     st.warning("please enter the GROQ API KEY")
